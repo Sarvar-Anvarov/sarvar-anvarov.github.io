@@ -1,0 +1,67 @@
+<!doctype html>
+<!-- Заготовка страницы поддержки. Её адрес идёт в App Store Connect как Support URL.
+     Замените всё в {{ }}, впишите настоящие вопросы и уберите строку с noindex. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Support · {{APP_NAME}}</title>
+<meta name="description" content="Help with {{APP_NAME}} and how to contact the developer.">
+<link rel="canonical" href="https://sarvar-anvarov.github.io/{{SLUG}}/support.html">
+<link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="/assets/site.css">
+<style>:root { --app-accent:{{ACCENT}}; }</style>
+</head>
+<body>
+<main class="page">
+
+<section id="en" lang="en">
+<p class="label"><a href="./">{{APP_NAME}}</a></p>
+<h1>Support</h1>
+<p class="meta"><a href="#ru">Русская версия</a></p>
+
+<div class="box">
+  <p><b>Write to <a href="mailto:sarvar.apps@gmail.com?subject={{APP_NAME}}">sarvar.apps@gmail.com</a></b></p>
+  <p>Questions, bugs, ideas and data requests all go to this address. If something went wrong, add your iPhone model,
+    iOS version and what you were doing.</p>
+</div>
+
+<h2>Common questions</h2>
+<h3>{{QUESTION}}</h3>
+<p>{{ANSWER}}</p>
+
+<h3>Something I paid for is missing</h3>
+<p>Write to us with the date of the purchase. Payments and refunds are handled by Apple: a refund can be requested at
+  <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p>
+</section>
+
+<hr>
+
+<section id="ru" lang="ru">
+<h1>Поддержка</h1>
+<p class="meta"><a href="#en">English version</a></p>
+
+<div class="box">
+  <p><b>Пишите на <a href="mailto:sarvar.apps@gmail.com?subject={{APP_NAME}}">sarvar.apps@gmail.com</a></b></p>
+  <p>Вопросы, ошибки, идеи и запросы о данных — всё на этот адрес. Если что-то сломалось, укажите модель iPhone, версию iOS
+    и что вы делали.</p>
+</div>
+
+<h2>Частые вопросы</h2>
+<h3>{{ВОПРОС}}</h3>
+<p>{{ОТВЕТ}}</p>
+
+<h3>Не пришла покупка</h3>
+<p>Напишите нам и укажите дату покупки. Оплату и возвраты проводит Apple: вернуть деньги можно через
+  <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p>
+</section>
+
+</main>
+<footer class="site-foot wrap">
+  <nav><a href="./">{{APP_NAME}}</a><a href="privacy.html">Privacy Policy</a></nav>
+  Made by <a href="/">Sarvar Anvarov</a>
+</footer>
+</body>
+</html>

@@ -3,237 +3,52 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Riposte: Sword Fighting Duel</title>
-<meta name="description" content="A sword fighting game for iPhone about timing. Read the wind-up, block, dodge or parry, and fight through five arenas.">
+<title>Sarvar Anvarov · Games and apps for iPhone</title>
+<meta name="description" content="Independent developer making games and apps for iPhone. Riposte: Sword Fighting Duel is coming soon.">
+<meta name="theme-color" content="#f5f3ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://sarvar-anvarov.github.io/">
+<link rel="icon" href="/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/icon-180.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Riposte: Sword Fighting Duel">
-<meta property="og:description" content="Read the wind-up. Block it, dodge it, or parry and strike back.">
+<meta property="og:site_name" content="Sarvar Anvarov">
+<meta property="og:title" content="Sarvar Anvarov · Games and apps for iPhone">
+<meta property="og:description" content="Independent developer making games and apps for iPhone.">
 <meta property="og:url" content="https://sarvar-anvarov.github.io/">
-<meta property="og:image" content="https://sarvar-anvarov.github.io/img/og.jpg">
+<meta property="og:image" content="https://sarvar-anvarov.github.io/riposte/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Grenze:wght@500;700&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root { --sand:#efe4cf; --sand2:#e6d6b8; --card:#f7efdf; --ink:#21180f; --muted:#6f604c; --bronze:#9a6a2c; --gold:#d9a656;
-    --night:#17110b; --night2:#221a12; --cream:#f6ecd9; --mist:#c9b99f; --blood:#b4462f; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--sand); color:var(--ink); font:18px/1.6 "Alegreya Sans", system-ui, sans-serif; }
-  a { color:inherit; }
-  h2 { font:700 clamp(34px, 4.6vw, 54px)/1.02 Grenze, serif; margin:0; }
-  h3 { font:700 25px/1.1 Grenze, serif; margin:0 0 8px; }
-  .kicker { font:500 14px Grenze, serif; letter-spacing:.3em; text-transform:uppercase; color:var(--bronze); margin:0 0 12px; }
-  .wrap { max-width:1160px; margin:0 auto; padding:0 16px; }
-
-  /* Первый экран */
-  .hero { position:relative; min-height:min(100svh, 920px); display:flex; flex-direction:column; justify-content:flex-end; align-items:center;
-    text-align:center; color:var(--cream); padding:0 16px 10vh;
-    background:linear-gradient(180deg, rgba(20,14,8,.05) 0%, rgba(20,14,8,.2) 38%, rgba(23,17,11,.94) 96%, var(--night) 100%), url(img/hero.jpg) center 30%/cover; }
-  .hero h1 { font:700 clamp(72px, 13vw, 176px)/.85 Grenze, serif; letter-spacing:.03em; margin:0; text-shadow:0 6px 48px rgba(0,0,0,.5); }
-  .hero .sub { font:500 clamp(15px, 2vw, 22px) Grenze, serif; letter-spacing:.32em; text-transform:uppercase; color:var(--gold); margin:14px 0 22px; }
-  .hero p { max-width:520px; margin:0 auto 30px; font-size:20px; color:#eadfca; }
-  .pill { display:inline-flex; gap:10px; align-items:center; padding:12px 24px; border:1px solid rgba(217,166,86,.7); border-radius:999px;
-    color:var(--cream); font-weight:500; background:rgba(0,0,0,.28); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
-  .pill::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--gold); box-shadow:0 0 12px var(--gold); }
-
-  /* Сюжет: три акта на тёмном */
-  .acts { background:var(--night); color:var(--cream); padding:72px 0 96px; }
-  .acts .kicker { color:var(--gold); }
-  .acts-head { text-align:center; margin-bottom:44px; }
-  .row { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
-  .act { position:relative; aspect-ratio:4/5; border-radius:14px; overflow:hidden; background:var(--night2);
-    box-shadow:0 30px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(217,166,86,.18); }
-  .act img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-  .act::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(15,10,6,.92) 90%); }
-  .act div { position:absolute; z-index:1; left:0; right:0; bottom:0; padding:24px 24px 26px; }
-  .act b { display:block; font:700 15px Grenze, serif; letter-spacing:.3em; color:var(--gold); margin-bottom:6px; }
-  .act p { margin:0; color:#e4d6bd; font-size:17px; line-height:1.5; }
-  .acts-foot { max-width:620px; margin:44px auto 0; text-align:center; font:500 clamp(22px, 2.6vw, 28px)/1.3 Grenze, serif; color:var(--cream); }
-  .acts-foot em { font-style:normal; color:var(--gold); }
-
-  /* Как играется: плитки */
-  .play { padding:96px 0 40px; }
-  .play-head { max-width:640px; margin-bottom:36px; }
-  .bento { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
-  .tile { background:var(--card); border-radius:18px; padding:28px; box-shadow:0 1px 0 rgba(120,90,50,.12), 0 18px 40px rgba(90,60,25,.08);
-    display:flex; flex-direction:column; gap:22px; }
-  .tile p { margin:0; color:var(--muted); font-size:17px; }
-  .span2 { grid-column:span 2; }
-  .visual { border-radius:12px; background:var(--night); color:var(--cream); padding:22px; position:relative; overflow:hidden; }
-
-  .meter .labels, .meter .ticks { display:flex; justify-content:space-between; font:500 13px Grenze, serif; letter-spacing:.18em; text-transform:uppercase; color:var(--mist); }
-  .meter .labels span:first-child { width:66.7%; } .meter .labels span:last-child { color:var(--gold); width:33.3%; text-align:center; }
-  .span2 .visual { flex:1; display:flex; flex-direction:column; justify-content:center; min-height:150px; padding:28px; }
-  .bar { position:relative; height:24px; margin:12px 0; border-radius:12px; display:flex; overflow:visible; }
-  .bar .wind { flex:0 0 66.7%; border-radius:12px 0 0 12px; background:repeating-linear-gradient(-45deg, #3a2e22 0 8px, #30261c 8px 16px); }
-  .bar .win { flex:1; border-radius:0 12px 12px 0; background:linear-gradient(90deg, #b27b30, var(--gold)); animation:glow 2.6s infinite; }
-  .bar .cursor { position:absolute; top:-7px; bottom:-7px; width:4px; margin-left:-2px; border-radius:2px; background:var(--cream);
-    box-shadow:0 0 12px rgba(255,240,210,.9); animation:sweep 2.6s infinite; }
-  .meter .ticks { font-size:12px; letter-spacing:.1em; }
-  .flash { position:absolute; right:22px; top:16px; font:700 22px Grenze, serif; letter-spacing:.2em; color:var(--gold);
-    text-shadow:0 0 18px rgba(217,166,86,.8); animation:flash 2.6s infinite; }
-  @keyframes sweep { 0% { left:0; } 70% { left:100%; } 100% { left:100%; } }
-  @keyframes glow { 0%, 46% { opacity:.5; box-shadow:none; } 50%, 70% { opacity:1; box-shadow:0 0 24px rgba(217,166,86,.85); } 78%, 100% { opacity:.5; box-shadow:none; } }
-  @keyframes flash { 0%, 58% { opacity:0; transform:scale(.92); } 63%, 80% { opacity:1; transform:scale(1); } 88%, 100% { opacity:0; } }
-
-  .pad { display:grid; grid-template-columns:repeat(6, 1fr); gap:10px 0; justify-items:center; padding:20px 10px 16px; }
-  .pad span { grid-column:span 2; display:flex; flex-direction:column; align-items:center; gap:6px; font:500 12px Grenze, serif; letter-spacing:.14em; text-transform:uppercase; color:var(--mist); }
-  .pad span.shift { grid-column:2 / span 2; }
-  .pad i { width:58px; height:58px; border-radius:50%; display:grid; place-items:center; background:rgba(246,236,217,.08);
-    box-shadow:inset 0 0 0 1.5px rgba(217,166,86,.55); color:var(--gold); }
-  .pad svg { width:28px; height:28px; }
-
-  .lines { display:flex; flex-direction:column; gap:10px; }
-  .lines q { quotes:none; align-self:flex-start; max-width:92%; padding:10px 14px; border-radius:4px 14px 14px 14px; background:rgba(246,236,217,.08);
-    box-shadow:inset 0 0 0 1px rgba(217,166,86,.3); font:500 18px/1.3 Grenze, serif; }
-  .lines q:nth-child(2) { align-self:flex-end; border-radius:14px 4px 14px 14px; }
-  .lines small { font:500 12px Grenze, serif; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); }
-
-  .duel svg, .fair svg { display:block; width:100%; height:96px; }
-
-  /* Арены */
-  .arenas { padding:72px 0 96px; }
-  .strip { display:grid; grid-template-columns:repeat(5, 1fr); gap:14px; margin-top:28px; }
-  .card { position:relative; aspect-ratio:3/4; border-radius:12px; overflow:hidden; color:var(--cream); background:var(--night2);
-    box-shadow:0 18px 36px rgba(60,36,10,.18); }
-  .card img { width:100%; height:100%; object-fit:cover; display:block; }
-  .card span { position:absolute; inset:auto 0 0 0; padding:48px 16px 16px; font:700 21px Grenze, serif; background:linear-gradient(transparent, rgba(20,14,8,.88)); }
-  .card small { display:block; font:500 12px Grenze, serif; letter-spacing:.28em; color:var(--gold); }
-
-  footer { background:var(--night); color:#cdbfa8; text-align:center; padding:48px 16px; font-size:16px; }
-  footer b { font:700 28px Grenze, serif; color:var(--cream); display:block; margin-bottom:8px; letter-spacing:.06em; }
-  footer a { color:var(--gold); }
-
-  @media (max-width:900px) {
-    .row, .strip { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:14px; padding:0 16px 8px; margin-left:-16px; margin-right:-16px; scrollbar-width:none; }
-    .row::-webkit-scrollbar, .strip::-webkit-scrollbar { display:none; }
-    .act { flex:0 0 82%; scroll-snap-align:center; }
-    .card { flex:0 0 64%; scroll-snap-align:center; }
-    .bento { grid-template-columns:1fr; }
-    .span2 { grid-column:auto; }
-    .acts { padding:56px 0 64px; }
-    .play { padding:64px 0 24px; }
-    .arenas { padding:56px 0 64px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .bar .cursor, .bar .win, .flash { animation:none; }
-    .bar .cursor { left:85%; } .bar .win { opacity:1; } .flash { opacity:1; }
-  }
-</style>
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<header class="hero">
-  <h1>RIPOSTE</h1>
-  <div class="sub">Sword Fighting Duel</div>
-  <p>Read the wind-up. Block it, dodge it, or parry and strike back.</p>
-  <span class="pill">Coming soon on iPhone</span>
+<header class="intro wrap">
+  <img class="mono" src="/icon-180.png" alt="" width="56" height="56">
+  <h1>Sarvar Anvarov</h1>
+  <p class="lead">Independent developer making games and apps for iPhone.</p>
+  <a class="button" href="mailto:sarvar.apps@gmail.com">sarvar.apps@gmail.com</a>
 </header>
 
-<section class="acts">
-  <div class="wrap">
-    <div class="acts-head">
-      <p class="kicker">The story</p>
-      <h2>They killed the champion.<br>Not in the arena.</h2>
-    </div>
-    <div class="row">
-      <article class="act"><img src="img/act1.jpg" alt="" loading="lazy"><div><b>I</b><h3>The champion</h3>
-        <p>Your father ruled the arenas. No one could beat him on the sand.</p></div></article>
-      <article class="act"><img src="img/act2.jpg" alt="" loading="lazy"><div><b>II</b><h3>The ambush</h3>
-        <p>His rival could not win in the open. So he came at night, with four men.</p></div></article>
-      <article class="act"><img src="img/act3.jpg" alt="" loading="lazy"><div><b>III</b><h3>The road</h3>
-        <p>Five arenas. Each one ends with a man from that night. The last one is him.</p></div></article>
-    </div>
-    <p class="acts-foot">Win your father’s name back the only way that counts: <em>in the arena, in front of everyone.</em></p>
-  </div>
-</section>
-
-<section class="play">
-  <div class="wrap">
-    <div class="play-head">
-      <p class="kicker">How it plays</p>
-      <h2>One moment decides the fight.</h2>
-    </div>
-    <div class="bento">
-      <article class="tile span2">
-        <div class="visual meter" aria-hidden="true">
-          <div class="labels"><span>Block</span><span>Parry</span></div>
-          <div class="bar"><i class="wind"></i><i class="win"></i><b class="cursor"></b></div>
-          <div class="ticks"><span>Heavy strike: wind-up starts</span><span>Hit · 0.6 s</span></div>
-          <div class="flash">PARRY</div>
+<main class="wrap">
+  <h2 class="label">Games and apps</h2>
+  <ul class="apps">
+    <!-- Новое приложение: скопируйте этот <li> и поменяйте ссылки, тексты и цвета. Подробнее в README.md -->
+    <li class="app" style="--app-accent:#b27b30; --app-bg:#17110b">
+      <a class="cover" href="/riposte/" tabindex="-1" aria-hidden="true"><img src="/riposte/img/cover.webp" alt="" width="960" height="504" loading="lazy"></a>
+      <div class="body">
+        <div class="head">
+          <img class="icon" src="/riposte/icon-180.png" alt="" width="60" height="60">
+          <div><h3><a href="/riposte/">Riposte</a></h3><p>Sword Fighting Duel</p></div>
         </div>
-        <div><h3>Timing is the weapon</h3>
-          <p>Every strike has a wind-up you can read. Block early and you hold. Block in the last 0.2 seconds and it’s a parry: the attacker is left wide open.</p></div>
-      </article>
+        <p class="desc">A sword fighting game about timing. Read the wind-up, block, dodge or parry, and fight through five arenas to win back your father’s name.</p>
+        <ul class="tags"><li>Game</li><li>iPhone</li><li class="soon">Coming soon</li></ul>
+        <nav class="links" aria-label="Riposte"><a href="/riposte/">Website</a><a href="/riposte/support.html">Support</a><a href="/riposte/privacy.html">Privacy Policy</a></nav>
+      </div>
+    </li>
+  </ul>
+</main>
 
-      <article class="tile">
-        <div class="visual pad" aria-hidden="true">
-          <span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 3h4.5v8.5l5.6 2.7c.9.4 1.4 1.3 1.4 2.3V20H5.5v-3.2l3-2.6z"/></svg></i>Kick</span>
-          <span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 15 9"/><path d="M12.5 6.5 15 4c2.6.6 4.4 2.4 5 5l-2.5 2.5c-.4-2.4-2.6-4.6-5-5z" fill="currentColor"/></svg></i>Heavy</span>
-          <span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l7 2.8V11c0 4.6-3 8-7 10-4-2-7-5.4-7-10V5.8z"/></svg></i>Block</span>
-          <span class="shift"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l3-3"/><path d="M6.5 16.5 17 6l3-2-1.9 3.1L7.5 17.5"/><path d="M5 14l5 5"/></svg></i>Light</span>
-          <span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h9"/><path d="M9 7l5 5-5 5"/><path d="M15 7l5 5-5 5" opacity=".5"/></svg></i>Dodge</span>
-        </div>
-        <div><h3>Five moves</h3>
-          <p>Every attack has an answer, and no defence covers them all. A kick breaks a block. Only a dodge beats it.</p></div>
-      </article>
-
-      <article class="tile">
-        <div class="visual lines" aria-hidden="true">
-          <small>Your father</small>
-          <q>Too early. Wait for the strike.</q>
-          <q>Too late. Again.</q>
-        </div>
-        <div><h3>Learn from your father</h3>
-          <p>Before the story begins, he teaches you to fight in his yard and calls out every mistake the moment you make it.</p></div>
-      </article>
-
-      <article class="tile duel">
-        <div class="visual" aria-hidden="true">
-          <svg viewBox="0 0 240 96" fill="none" stroke-linecap="round">
-            <rect x="26" y="14" width="44" height="72" rx="9" stroke="#d9a656" stroke-width="2"/><path d="M41 78h14" stroke="#d9a656" stroke-width="2"/>
-            <rect x="170" y="14" width="44" height="72" rx="9" stroke="#d9a656" stroke-width="2"/><path d="M185 78h14" stroke="#d9a656" stroke-width="2"/>
-            <path d="M104 50a16 16 0 0 1 32 0M94 50a26 26 0 0 1 52 0M84 50a36 36 0 0 1 72 0" stroke="#f6ecd9" stroke-width="2" opacity=".75"/>
-            <circle cx="120" cy="52" r="4" fill="#f6ecd9"/>
-          </svg>
-        </div>
-        <div><h3>Duel a friend</h3>
-          <p>Two iPhones and a personal hotspot. No internet, no accounts.</p></div>
-      </article>
-
-      <article class="tile fair">
-        <div class="visual" aria-hidden="true">
-          <svg viewBox="0 0 240 96">
-            <g fill="#b4462f">
-              <path d="M44 74s-14-8.8-18.6-17.2C22 50.4 26 43 33.2 43c4 0 7.2 2.2 10.8 6 3.6-3.8 6.8-6 10.8-6 7.2 0 11.2 7.4 7.8 13.8C58 65.2 44 74 44 74z"/>
-              <path d="M120 74s-14-8.8-18.6-17.2C98 50.4 102 43 109.2 43c4 0 7.2 2.2 10.8 6 3.6-3.8 6.8-6 10.8-6 7.2 0 11.2 7.4 7.8 13.8C134 65.2 120 74 120 74z"/>
-            </g>
-            <path d="M196 74s-14-8.8-18.6-17.2C174 50.4 178 43 185.2 43c4 0 7.2 2.2 10.8 6 3.6-3.8 6.8-6 10.8-6 7.2 0 11.2 7.4 7.8 13.8C210 65.2 196 74 196 74z" fill="none" stroke="#b4462f" stroke-width="2.4" stroke-dasharray="5 4"/>
-          </svg>
-        </div>
-        <div><h3>No forced ads</h3>
-          <p>Lives come back over time. Watch a video only when you want them back now.</p></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="arenas">
-  <div class="wrap">
-    <p class="kicker">The road</p>
-    <h2>Five arenas. One name to win back.</h2>
-    <div class="strip">
-      <div class="card"><img src="img/arena1.jpg" alt="" loading="lazy"><span><small>I</small>Sand Circle</span></div>
-      <div class="card"><img src="img/arena2.jpg" alt="" loading="lazy"><span><small>II</small>Winter Harbor</span></div>
-      <div class="card"><img src="img/arena3.jpg" alt="" loading="lazy"><span><small>III</small>Temple Court</span></div>
-      <div class="card"><img src="img/arena4.jpg" alt="" loading="lazy"><span><small>IV</small>Market Square</span></div>
-      <div class="card"><img src="img/arena5.jpg" alt="" loading="lazy"><span><small>V</small>Colosseum</span></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <b>RIPOSTE</b>
-  Made by Sarvar · <a href="mailto:sarvar.apps@gmail.com">sarvar.apps@gmail.com</a> · <a href="privacy.html">Privacy Policy</a>
+<footer class="site-foot wrap">
+  © 2026 Sarvar Anvarov · <a href="mailto:sarvar.apps@gmail.com">sarvar.apps@gmail.com</a><br>
+  Вопросы, ошибки и запросы о данных — на тот же адрес.
 </footer>
 </body>
 </html>

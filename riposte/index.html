@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riposte: Sword Fighting Duel</title>
+<meta name="description" content="A sword fighting game for iPhone about timing. Read the wind-up, block, dodge or parry, and fight through five arenas.">
+<meta name="theme-color" content="#17110b">
+<link rel="canonical" href="https://sarvar-anvarov.github.io/riposte/">
+<link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Riposte">
+<meta property="og:title" content="Riposte: Sword Fighting Duel">
+<meta property="og:description" content="Read the wind-up. Block it, dodge it, or parry and strike back.">
+<meta property="og:url" content="https://sarvar-anvarov.github.io/riposte/">
+<meta property="og:image" content="https://sarvar-anvarov.github.io/riposte/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/grenze-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="riposte.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Riposte: Sword Fighting Duel",
+  "description": "A sword fighting game for iPhone about timing. Read the wind-up, block, dodge or parry, and fight through five arenas.",
+  "url": "https://sarvar-anvarov.github.io/riposte/",
+  "image": "https://sarvar-anvarov.github.io/riposte/img/og.jpg",
+  "gamePlatform": "iPhone",
+  "operatingSystem": "iOS",
+  "applicationCategory": "GameApplication",
+  "genre": ["Action", "Fighting"],
+  "playMode": ["SinglePlayer", "MultiPlayer"],
+  "author": { "@type": "Person", "name": "Sarvar Anvarov", "url": "https://sarvar-anvarov.github.io/" }
+}
+</script>
+<style>
+  h2 { font:700 clamp(34px, 4.6vw, 54px)/1.02 var(--display); margin:0; }
+  h3 { font:700 25px/1.1 var(--display); margin:0 0 8px; }
+  .kicker { font:500 14px var(--display); letter-spacing:.3em; text-transform:uppercase; color:var(--bronze); margin:0 0 12px; }
+  .wrap { max-width:1160px; margin:0 auto; padding:0 16px; }
+
+  /* Первый экран */
+  .hero { position:relative; isolation:isolate; overflow:hidden; min-height:min(100svh, 920px); display:flex; flex-direction:column;
+    justify-content:flex-end; align-items:center; text-align:center; color:var(--cream); padding:0 16px 10vh; background:var(--night); }
+  .hero-bg img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; object-position:center 30%; }
+  .hero::before { content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(180deg, rgba(20,14,8,.05) 0%, rgba(20,14,8,.2) 38%, rgba(23,17,11,.94) 96%, var(--night) 100%); }
+  .hero h1 { font:700 clamp(72px, 13vw, 176px)/.85 var(--display); letter-spacing:.03em; margin:0; text-shadow:0 6px 48px rgba(0,0,0,.5); }
+  .hero .sub { font:500 clamp(15px, 2vw, 22px) var(--display); letter-spacing:.32em; text-transform:uppercase; color:var(--gold); margin:14px 0 22px; }
+  .hero p { max-width:520px; margin:0 auto 30px; font-size:20px; color:#eadfca; }
+  .pill { display:inline-flex; gap:10px; align-items:center; padding:12px 24px; border:1px solid rgba(217,166,86,.7); border-radius:999px;
+    color:var(--cream); font-weight:500; background:rgba(0,0,0,.28); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
+  .pill::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--gold); box-shadow:0 0 12px var(--gold); }
+
+  /* Сюжет: три акта на тёмном */
+  .acts { background:var(--night); color:var(--cream); padding:72px 0 96px; }
+  .acts .kicker { color:var(--gold); }
+  .acts-head { text-align:center; margin-bottom:44px; }
+  .row { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
+  .act { position:relative; aspect-ratio:4/5; border-radius:14px; overflow:hidden; background:var(--night2);
+    box-shadow:0 30px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(217,166,86,.18); }
+  .act img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .act::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(15,10,6,.92) 90%); }
+  .act div { position:absolute; z-index:1; left:0; right:0; bottom:0; padding:24px 24px 26px; }
+  .act b { display:block; font:700 15px var(--display); letter-spacing:.3em; color:var(--gold); margin-bottom:6px; }
+  .act p { margin:0; color:#e4d6bd; font-size:17px; line-height:1.5; }
+  .acts-foot { max-width:620px; margin:44px auto 0; text-align:center; font:500 clamp(22px, 2.6vw, 28px)/1.3 var(--display); color:var(--cream); }
+  .acts-foot em { font-style:normal; color:var(--gold); }
+
+  /* Как играется: плитки */
+  .play { padding:96px 0 40px; }
+  .play-head { max-width:640px; margin-bottom:36px; }
+  .bento { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
+  .tile { position:relative; background:var(--card); border-radius:18px; padding:28px; box-shadow:0 1px 0 rgba(120,90,50,.12), 0 18px 40px rgba(90,60,25,.08);
+    display:flex; flex-direction:column; gap:22px; }
+  .tile p { margin:0; color:var(--muted); font-size:17px; }
+  .span2 { grid-column:span 2; }
+  .visual { border-radius:12px; background:var(--night); color:var(--cream); padding:22px; position:relative; overflow:hidden; }
+
+  /* Шкала парирования: сама крутится, а по нажатию становится мини-игрой */
+  .meter { display:flex; flex-direction:column; justify-content:center; width:100%; border:0; text-align:left; font:inherit; cursor:pointer;
+    -webkit-user-select:none; user-select:none; touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+  .span2 .meter { flex:1; min-height:150px; padding:24px 28px 28px; }
+  .meter > span { display:flex; }
+  .meter .top { justify-content:space-between; align-items:center; gap:12px; min-height:40px; margin-bottom:6px; }
+  .meter .say { align-items:center; gap:8px; font:500 13px var(--display); letter-spacing:.2em; text-transform:uppercase; color:var(--gold); }
+  .meter .say::before { content:""; flex:none; width:7px; height:7px; border-radius:50%; background:var(--gold); box-shadow:0 0 10px var(--gold); animation:pulse 1.6s infinite; }
+  .meter .labels, .meter .ticks { justify-content:space-between; font:500 13px var(--display); letter-spacing:.18em; text-transform:uppercase; color:var(--mist); }
+  .meter .labels span:first-child { width:66.7%; } .meter .labels span:last-child { color:var(--gold); width:33.3%; text-align:center; }
+  .bar { position:relative; height:24px; margin:12px 0; border-radius:12px; display:flex; }
+  .bar .wind { flex:0 0 66.7%; border-radius:12px 0 0 12px; background:repeating-linear-gradient(-45deg, #3a2e22 0 8px, #30261c 8px 16px); }
+  .bar .win { flex:1; border-radius:0 12px 12px 0; background:linear-gradient(90deg, #b27b30, var(--gold)); animation:glow 2.6s infinite; }
+  .bar .cursor { position:absolute; top:-7px; bottom:-7px; width:4px; margin-left:-2px; border-radius:2px; background:var(--cream);
+    box-shadow:0 0 12px rgba(255,240,210,.9); animation:sweep 2.6s infinite; }
+  .meter .ticks { font-size:12px; letter-spacing:.1em; gap:12px; }
+  .meter .ticks span { white-space:nowrap; }
+  .flash { flex:none; font:700 22px var(--display); letter-spacing:.2em; color:var(--gold); text-shadow:0 0 18px rgba(217,166,86,.8); animation:flash 2.6s infinite; }
+  @keyframes sweep { 0% { left:0; } 70% { left:100%; } 100% { left:100%; } }
+  @keyframes glow { 0%, 46% { opacity:.5; box-shadow:none; } 50%, 70% { opacity:1; box-shadow:0 0 24px rgba(217,166,86,.85); } 78%, 100% { opacity:.5; box-shadow:none; } }
+  @keyframes flash { 0%, 58% { opacity:0; transform:scale(.92); } 63%, 80% { opacity:1; transform:scale(1); } 88%, 100% { opacity:0; } }
+  @keyframes pulse { 50% { opacity:.35; } }
+
+  .meter.live .cursor, .meter.live .win, .meter.live .flash { animation:none; }
+  .meter.live .cursor { left:0; }
+  .meter.live .win { opacity:.5; transition:opacity .1s, box-shadow .1s; }
+  .meter.live.open .win { opacity:1; box-shadow:0 0 24px rgba(217,166,86,.85); }
+  .meter.live .say { font:500 17px/1.2 var(--display); letter-spacing:.02em; text-transform:none; color:var(--cream); }
+  .meter.live .say::before { display:none; }
+  .meter.live .flash { opacity:0; transform:scale(.92); transition:opacity .12s, transform .12s; }
+  .meter.live .flash.show { opacity:1; transform:none; }
+  .flash.block { color:var(--mist); text-shadow:none; }
+  .flash.hit { color:#de6448; text-shadow:0 0 18px rgba(180,70,47,.75); }
+
+  .pad { display:grid; grid-template-columns:repeat(6, 1fr); gap:10px 0; justify-items:center; padding:20px 10px 16px; }
+  .pad span { grid-column:span 2; display:flex; flex-direction:column; align-items:center; gap:6px; font:500 12px var(--display); letter-spacing:.14em; text-transform:uppercase; color:var(--mist); }
+  .pad span.shift { grid-column:2 / span 2; }
+  .pad i { width:58px; height:58px; border-radius:50%; display:grid; place-items:center; background:rgba(246,236,217,.08);
+    box-shadow:inset 0 0 0 1.5px rgba(217,166,86,.55); color:var(--gold); }
+  .pad svg { width:28px; height:28px; }
+
+  .lines { display:flex; flex-direction:column; gap:10px; }
+  .lines q { quotes:none; align-self:flex-start; max-width:92%; padding:10px 14px; border-radius:4px 14px 14px 14px; background:rgba(246,236,217,.08);
+    box-shadow:inset 0 0 0 1px rgba(217,166,86,.3); font:500 18px/1.3 var(--display); }
+  .lines q:nth-child(2) { align-self:flex-end; border-radius:14px 4px 14px 14px; }
+  .lines small { font:500 12px var(--display); letter-spacing:.2em; text-transform:uppercase; color:var(--gold); }
+
+  .duel svg, .fair svg { display:block; width:100%; height:96px; }
+
+  /* Арены */
+  .arenas { padding:72px 0 56px; }
+  .strip { display:grid; grid-template-columns:repeat(5, 1fr); gap:14px; margin-top:28px; }
+  .card { position:relative; aspect-ratio:3/4; border-radius:12px; overflow:hidden; color:var(--cream); background:var(--night2);
+    box-shadow:0 18px 36px rgba(60,36,10,.18); }
+  .card img { width:100%; height:100%; object-fit:cover; display:block; }
+  .card span { position:absolute; inset:auto 0 0 0; padding:48px 16px 16px; font:700 21px var(--display); background:linear-gradient(transparent, rgba(20,14,8,.88)); }
+  .card small { display:block; font:500 12px var(--display); letter-spacing:.28em; color:var(--gold); }
+
+  /* Коротко об игре */
+  .glance { padding:0 0 96px; }
+  .glance dl { margin:0; display:grid; grid-template-columns:repeat(5, 1fr); gap:1px; background:rgba(120,90,50,.16); border-radius:18px; overflow:hidden;
+    box-shadow:0 1px 0 rgba(120,90,50,.12), 0 18px 40px rgba(90,60,25,.08); }
+  .glance dl div { background:var(--card); padding:20px 24px 22px; }
+  .glance dt { font:500 13px var(--display); letter-spacing:.24em; text-transform:uppercase; color:var(--bronze); }
+  .glance dd { margin:4px 0 0; font:700 21px/1.2 var(--display); }
+
+  .dots { display:none; }
+
+  @media (max-width:900px) {
+    .row, .strip { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:14px; padding:0 16px 8px; margin-left:-16px; margin-right:-16px; scrollbar-width:none; }
+    .row::-webkit-scrollbar, .strip::-webkit-scrollbar { display:none; }
+    .act { flex:0 0 82%; scroll-snap-align:center; }
+    .card { flex:0 0 64%; scroll-snap-align:center; }
+    .dots { display:flex; justify-content:center; gap:7px; margin-top:14px; }
+    .dots i { width:6px; height:6px; border-radius:3px; background:currentColor; opacity:.25; transition:width .2s, opacity .2s; }
+    .dots i.on { width:18px; opacity:.8; }
+    .bento { grid-template-columns:1fr; }
+    .span2 { grid-column:auto; }
+    .acts { padding:56px 0 64px; }
+    .play { padding:64px 0 24px; }
+    .arenas { padding:56px 0 40px; }
+    .glance { padding-bottom:64px; }
+    .glance dl { grid-template-columns:1fr 1fr; }
+    .glance dl div:last-child { grid-column:span 2; }
+  }
+  @media (max-width:520px) {
+    .ticks .wide { display:none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bar .cursor, .bar .win, .flash, .meter .say::before { animation:none; }
+    .bar .cursor { left:85%; } .bar .win { opacity:1; } .flash { opacity:1; }
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <picture class="hero-bg">
+    <source media="(max-aspect-ratio: 4/5)" srcset="img/hero-tall.webp" width="1080" height="1350">
+    <img src="img/hero.webp" alt="" width="2400" height="1350" fetchpriority="high">
+  </picture>
+  <h1>RIPOSTE</h1>
+  <div class="sub">Sword Fighting Duel</div>
+  <p>Read the wind-up. Block it, dodge it, or parry and strike back.</p>
+  <span class="pill">Coming soon on iPhone</span>
+</header>
+
+<main>
+<section class="acts">
+  <div class="wrap">
+    <div class="acts-head">
+      <p class="kicker">The story</p>
+      <h2>They killed the champion.<br>Not in the arena.</h2>
+    </div>
+    <div class="row">
+      <article class="act"><img src="img/act1.webp" alt="The champion with his sword on the temple steps" width="800" height="1000" loading="lazy"><div><b>I</b><h3>The champion</h3>
+        <p>Your father ruled the arenas. No one could beat him on the sand.</p></div></article>
+      <article class="act"><img src="img/act2.webp" alt="A temple at night, lit by a single torch" width="800" height="1000" loading="lazy"><div><b>II</b><h3>The ambush</h3>
+        <p>His rival could not win in the open. So he came at night, with four men.</p></div></article>
+      <article class="act"><img src="img/act3.webp" alt="The city and its temple, seen from the arena stands" width="800" height="1000" loading="lazy"><div><b>III</b><h3>The road</h3>
+        <p>Five arenas. Each one ends with a man from that night. The last one is him.</p></div></article>
+    </div>
+    <p class="acts-foot">Win your father’s name back the only way that counts: <em>in the arena, in front of everyone.</em></p>
+  </div>
+</section>
+
+<section class="play">
+  <div class="wrap">
+    <div class="play-head">
+      <p class="kicker">How it plays</p>
+      <h2>One moment decides the fight.</h2>
+    </div>
+    <div class="bento">
+      <article class="tile span2">
+        <button class="visual meter" type="button" aria-label="Try a parry: press when the marker reaches the gold zone">
+          <span class="top" aria-hidden="true"><span class="say">Tap to try</span><span class="flash">PARRY</span></span>
+          <span class="labels" aria-hidden="true"><span>Block</span><span>Parry</span></span>
+          <span class="bar" aria-hidden="true"><i class="wind"></i><i class="win"></i><b class="cursor"></b></span>
+          <span class="ticks" aria-hidden="true"><span><span class="wide">Heavy strike: </span>wind-up starts</span><span>Hit · 0.6 s</span></span>
+        </button>
+        <p class="sr" aria-live="polite"></p>
+        <div><h3>Timing is the weapon</h3>
+          <p>Every strike has a wind-up you can read. Block early and you hold. Block in the last 0.2 seconds and it’s a parry: the attacker is left wide open.</p></div>
+      </article>
+
+      <article class="tile">
+        <div class="visual pad" aria-hidden="true">
+          <span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 3h4.5v8.5l5.6 2.7c.9.4 1.4 1.3 1.4 2.3V20H5.5v-3.2l3-2.6z"/></svg></i>Kick</span>
+          <span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 15 9"/><path d="M12.5 6.5 15 4c2.6.6 4.4 2.4 5 5l-2.5 2.5c-.4-2.4-2.6-4.6-5-5z" fill="currentColor"/></svg></i>Heavy</span>
+          <span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l7 2.8V11c0 4.6-3 8-7 10-4-2-7-5.4-7-10V5.8z"/></svg></i>Block</span>
+          <span class="shift"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l3-3"/><path d="M6.5 16.5 17 6l3-2-1.9 3.1L7.5 17.5"/><path d="M5 14l5 5"/></svg></i>Light</span>
+          <span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h9"/><path d="M9 7l5 5-5 5"/><path d="M15 7l5 5-5 5" opacity=".5"/></svg></i>Dodge</span>
+        </div>
+        <div><h3>Five moves</h3>
+          <p>Every attack has an answer, and no defence covers them all. A kick breaks a block. Only a dodge beats it.</p></div>
+      </article>
+
+      <article class="tile">
+        <div class="visual lines" aria-hidden="true">
+          <small>Your father</small>
+          <q>Too early. Wait for the strike.</q>
+          <q>Too late. Again.</q>
+        </div>
+        <div><h3>Learn from your father</h3>
+          <p>Before the story begins, he teaches you to fight in his yard and calls out every mistake the moment you make it.</p></div>
+      </article>
+
+      <article class="tile duel">
+        <div class="visual" aria-hidden="true">
+          <svg viewBox="0 0 240 96" fill="none" stroke-linecap="round">
+            <rect x="26" y="14" width="44" height="72" rx="9" stroke="#d9a656" stroke-width="2"/><path d="M41 78h14" stroke="#d9a656" stroke-width="2"/>
+            <rect x="170" y="14" width="44" height="72" rx="9" stroke="#d9a656" stroke-width="2"/><path d="M185 78h14" stroke="#d9a656" stroke-width="2"/>
+            <path d="M104 50a16 16 0 0 1 32 0M94 50a26 26 0 0 1 52 0M84 50a36 36 0 0 1 72 0" stroke="#f6ecd9" stroke-width="2" opacity=".75"/>
+            <circle cx="120" cy="52" r="4" fill="#f6ecd9"/>
+          </svg>
+        </div>
+        <div><h3>Duel a friend</h3>
+          <p>Two iPhones and a personal hotspot. No internet, no accounts.</p></div>
+      </article>
+
+      <article class="tile fair">
+        <div class="visual" aria-hidden="true">
+          <svg viewBox="0 0 240 96">
+            <g fill="#b4462f">
+              <path d="M44 74s-14-8.8-18.6-17.2C22 50.4 26 43 33.2 43c4 0 7.2 2.2 10.8 6 3.6-3.8 6.8-6 10.8-6 7.2 0 11.2 7.4 7.8 13.8C58 65.2 44 74 44 74z"/>
+              <path d="M120 74s-14-8.8-18.6-17.2C98 50.4 102 43 109.2 43c4 0 7.2 2.2 10.8 6 3.6-3.8 6.8-6 10.8-6 7.2 0 11.2 7.4 7.8 13.8C134 65.2 120 74 120 74z"/>
+            </g>
+            <path d="M196 74s-14-8.8-18.6-17.2C174 50.4 178 43 185.2 43c4 0 7.2 2.2 10.8 6 3.6-3.8 6.8-6 10.8-6 7.2 0 11.2 7.4 7.8 13.8C210 65.2 196 74 196 74z" fill="none" stroke="#b4462f" stroke-width="2.4" stroke-dasharray="5 4"/>
+          </svg>
+        </div>
+        <div><h3>No forced ads</h3>
+          <p>Lives come back over time. Watch a video only when you want them back now.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="arenas">
+  <div class="wrap">
+    <p class="kicker">The road</p>
+    <h2>Five arenas. One name to win back.</h2>
+    <div class="strip">
+      <div class="card"><img src="img/arena1.webp" alt="" width="720" height="960" loading="lazy"><span><small>I</small>Sand Circle</span></div>
+      <div class="card"><img src="img/arena2.webp" alt="" width="720" height="960" loading="lazy"><span><small>II</small>Winter Harbor</span></div>
+      <div class="card"><img src="img/arena3.webp" alt="" width="720" height="960" loading="lazy"><span><small>III</small>Temple Court</span></div>
+      <div class="card"><img src="img/arena4.webp" alt="" width="720" height="960" loading="lazy"><span><small>IV</small>Market Square</span></div>
+      <div class="card"><img src="img/arena5.webp" alt="" width="720" height="960" loading="lazy"><span><small>V</small>Colosseum</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="glance" aria-label="At a glance">
+  <div class="wrap">
+    <dl>
+      <div><dt>Platform</dt><dd>iPhone</dd></div>
+      <div><dt>Modes</dt><dd>Story, duel with a friend</dd></div>
+      <div><dt>Arenas</dt><dd>Five</dd></div>
+      <div><dt>Account</dt><dd>Not needed</dd></div>
+      <div><dt>Ads</dt><dd>Only when you choose</dd></div>
+    </dl>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <b>RIPOSTE</b>
+  <nav><a href="support.html">Support</a><a href="privacy.html">Privacy Policy</a><a href="mailto:sarvar.apps@gmail.com">sarvar.apps@gmail.com</a></nav>
+  <p>Made by <a href="/">Sarvar Anvarov</a></p>
+</footer>
+
+<script>
+// Точки под каруселями на телефоне: какая карточка сейчас в центре
+document.querySelectorAll('.row, .strip').forEach(list => {
+  const items = [...list.children];
+  const dots = document.createElement('div');
+  dots.className = 'dots';
+  dots.setAttribute('aria-hidden', 'true');
+  items.forEach(() => dots.append(document.createElement('i')));
+  list.after(dots);
+  const mark = i => [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
+  mark(0);
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.intersectionRatio >= .75) mark(items.indexOf(e.target));
+  }), { root: list, threshold: .75 });
+  items.forEach(it => io.observe(it));
+});
+
+// Мини-игра на шкале: замах длится 0.6 с, парирование в последние 0.2 с, как в игре
+(() => {
+  const box = document.querySelector('.meter');
+  const cursor = box.querySelector('.cursor');
+  const flash = box.querySelector('.flash');
+  const say = box.querySelector('.say');
+  const live = box.parentElement.querySelector('[aria-live]');
+  const WIND = 600, WINDOW = 200, GRACE = 60;
+  let state = 'idle', start = 0, raf = 0, timer = 0, streak = 0, idleHits = 0;
+
+  const show = (kind, word, line, spoken) => {
+    flash.className = 'flash show ' + kind;
+    flash.textContent = word;
+    say.textContent = line;
+    live.textContent = spoken;
+  };
+
+  const next = () => {
+    state = 'wait';
+    box.classList.remove('open');
+    flash.className = 'flash';
+    cursor.style.left = '0%';
+    timer = setTimeout(strike, 500 + Math.random() * 1000);
+  };
+
+  const strike = () => {
+    state = 'sweep';
+    start = performance.now();
+    raf = requestAnimationFrame(tick);
+  };
+
+  const tick = now => {
+    const t = now - start;
+    cursor.style.left = Math.min(t / WIND, 1) * 100 + '%';
+    box.classList.toggle('open', t >= WIND - WINDOW);
+    if (t > WIND + GRACE) return finish('hit');
+    raf = requestAnimationFrame(tick);
+  };
+
+  const finish = kind => {
+    cancelAnimationFrame(raf);
+    state = 'result';
+    if (kind === 'parry') {
+      streak++; idleHits = 0;
+      show('parry', 'PARRY', streak > 1 ? streak + ' in a row. Again.' : 'Good. Again.', 'Parry!');
+    } else if (kind === 'block') {
+      streak = 0; idleHits = 0;
+      show('block', 'BLOCK', 'Too early. Wait for the strike.', 'Blocked, too early for a parry.');
+    } else {
+      streak = 0;
+      show('hit', 'HIT', 'Too late. Again.', 'Hit, too late.');
+      if (++idleHits >= 3) return (timer = setTimeout(stop, 1200));
+    }
+    timer = setTimeout(next, 1200);
+  };
+
+  const begin = () => {
+    state = 'wait';
+    streak = 0; idleHits = 0;
+    box.classList.add('live');
+    say.textContent = 'Watch the marker.';
+    next();
+  };
+
+  const stop = () => {
+    clearTimeout(timer);
+    cancelAnimationFrame(raf);
+    state = 'idle';
+    box.classList.remove('live', 'open');
+    flash.className = 'flash';
+    flash.textContent = 'PARRY';
+    say.textContent = 'Tap to try';
+    cursor.style.left = '';
+  };
+
+  const press = () => {
+    if (state === 'wait') say.textContent = 'Wait for the strike.';
+    else if (state === 'sweep') finish(performance.now() - start >= WIND - WINDOW ? 'parry' : 'block');
+  };
+
+  // Старт по click, чтобы прокрутка пальцем не запускала игру; во время игры важна каждая миллисекунда, поэтому pointerdown
+  box.addEventListener('click', () => { if (state === 'idle') begin(); });
+  box.addEventListener('pointerdown', e => {
+    if (state === 'idle' || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    press();
+  });
+  box.addEventListener('keydown', e => {
+    if (state === 'idle' || e.repeat || (e.key !== ' ' && e.key !== 'Enter')) return;
+    e.preventDefault();
+    press();
+  });
+  new IntersectionObserver(([e]) => { if (!e.isIntersecting && state !== 'idle') stop(); }).observe(box);
+})();
+</script>
+</body>
+</html>

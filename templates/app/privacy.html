@@ -1,0 +1,83 @@
+<!doctype html>
+<!-- Заготовка политики конфиденциальности. Её адрес идёт в App Store Connect как Privacy Policy URL.
+     Это только каркас: опишите то, что на самом деле делает приложение и его SDK, и сверьте с ответами
+     в разделе App Privacy в App Store Connect. Пример готовой политики: /riposte/privacy.html.
+     Замените всё в {{ }} и уберите строку с noindex. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Privacy Policy · {{APP_NAME}}</title>
+<meta name="description" content="What data {{APP_NAME}} handles and what choices you have.">
+<link rel="canonical" href="https://sarvar-anvarov.github.io/{{SLUG}}/privacy.html">
+<link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="/assets/site.css">
+<style>:root { --app-accent:{{ACCENT}}; }</style>
+</head>
+<body>
+<main class="page">
+
+<section id="en" lang="en">
+<p class="label"><a href="./">{{APP_NAME}}</a></p>
+<h1>Privacy Policy</h1>
+<p class="meta">Effective date: {{DATE}} · <a href="#ru">Русская версия</a></p>
+
+<p>{{APP_NAME}} is made by Sarvar Anvarov, an independent developer (“we”). This policy explains what data the app
+  handles and what choices you have. Contact: <a href="mailto:sarvar.apps@gmail.com">sarvar.apps@gmail.com</a>.</p>
+
+<h2>What the app keeps itself</h2>
+<p>{{WHAT_IS_STORED_AND_WHERE}}</p>
+
+<h2>Third parties</h2>
+<p>{{SDKS_AND_WHAT_THEY_COLLECT_OR_NONE}}</p>
+
+<h2>Purchases</h2>
+<p>Purchases are processed by Apple. We never see your payment details.</p>
+
+<h2>Children</h2>
+<p>{{AGE_STATEMENT}}</p>
+
+<h2>Keeping and deleting data</h2>
+<p>{{HOW_TO_DELETE}}</p>
+
+<h2>Changes</h2>
+<p>If this policy changes, the new version will appear on this page with a new effective date.</p>
+</section>
+
+<hr>
+
+<section id="ru" lang="ru">
+<h1>Политика конфиденциальности</h1>
+<p class="meta">Действует с {{ДАТА}} · <a href="#en">English version</a></p>
+
+<p>Приложение {{APP_NAME}} сделал независимый разработчик Sarvar Anvarov («мы»). Здесь написано, какие данные обрабатывает
+  приложение и что вы можете с этим сделать. Связь: <a href="mailto:sarvar.apps@gmail.com">sarvar.apps@gmail.com</a>.</p>
+
+<h2>Что хранит само приложение</h2>
+<p>{{ЧТО_И_ГДЕ_ХРАНИТСЯ}}</p>
+
+<h2>Сторонние сервисы</h2>
+<p>{{КАКИЕ_SDK_И_ЧТО_СОБИРАЮТ_ИЛИ_НИКАКИХ}}</p>
+
+<h2>Покупки</h2>
+<p>Покупки проводит Apple. Платёжных данных мы не видим.</p>
+
+<h2>Дети</h2>
+<p>{{ПРО_ВОЗРАСТ}}</p>
+
+<h2>Хранение и удаление</h2>
+<p>{{КАК_УДАЛИТЬ}}</p>
+
+<h2>Изменения</h2>
+<p>Если политика изменится, новая версия появится на этой странице с новой датой.</p>
+</section>
+
+</main>
+<footer class="site-foot wrap">
+  <nav><a href="./">{{APP_NAME}}</a><a href="support.html">Support</a></nav>
+  Made by <a href="/">Sarvar Anvarov</a>
+</footer>
+</body>
+</html>

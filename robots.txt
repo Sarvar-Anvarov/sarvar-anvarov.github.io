@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /templates/
+
+Sitemap: https://sarvar-anvarov.github.io/sitemap.xml

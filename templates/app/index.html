@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- Заготовка страницы нового приложения. Как пользоваться — в README.md в корне.
+     Замените всё в {{ }} и уберите строку с noindex. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>{{APP_NAME}}: {{SUBTITLE}}</title>
+<meta name="description" content="{{ONE_SENTENCE}}">
+<meta name="theme-color" content="{{ACCENT}}">
+<link rel="canonical" href="https://sarvar-anvarov.github.io/{{SLUG}}/">
+<link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{APP_NAME}}">
+<meta property="og:title" content="{{APP_NAME}}: {{SUBTITLE}}">
+<meta property="og:description" content="{{ONE_SENTENCE}}">
+<meta property="og:url" content="https://sarvar-anvarov.github.io/{{SLUG}}/">
+<meta property="og:image" content="https://sarvar-anvarov.github.io/{{SLUG}}/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/assets/site.css">
+<style>:root { --app-accent:{{ACCENT}}; }</style>
+</head>
+<body>
+<header class="app-hero">
+  <img class="icon" src="icon-180.png" alt="" width="112" height="112">
+  <h1>{{APP_NAME}}</h1>
+  <p class="sub">{{ONE_SENTENCE}}</p>
+  <!-- До релиза — статус. После релиза — официальный значок «Download on the App Store»:
+       https://developer.apple.com/app-store/marketing/guidelines/ -->
+  <span class="button">Coming soon on iPhone</span>
+</header>
+
+<main class="wrap">
+  <ul class="features">
+    <li><h3>{{FEATURE_1}}</h3><p>{{FEATURE_1_TEXT}}</p></li>
+    <li><h3>{{FEATURE_2}}</h3><p>{{FEATURE_2_TEXT}}</p></li>
+    <li><h3>{{FEATURE_3}}</h3><p>{{FEATURE_3_TEXT}}</p></li>
+  </ul>
+</main>
+
+<footer class="site-foot wrap">
+  <nav><a href="support.html">Support</a><a href="privacy.html">Privacy Policy</a><a href="mailto:sarvar.apps@gmail.com">sarvar.apps@gmail.com</a></nav>
+  Made by <a href="/">Sarvar Anvarov</a>
+</footer>
+</body>
+</html>
