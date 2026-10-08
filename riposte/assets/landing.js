@@ -22,7 +22,7 @@ document.querySelectorAll('.row, .strip').forEach(list => {
   const say = box.querySelector('.say');
   const live = box.parentElement.querySelector('[aria-live]');
   const WIND = 600, WINDOW = 200, GRACE = 60;
-  // Надписи в покое берём со страницы, остальные — по языку страницы
+  // Надписи в покое берём со страницы, остальные выбираем по языку страницы
   const idleWord = flash.textContent, idleSay = say.textContent;
   const STRINGS = {
     en: { parry: 'PARRY', block: 'BLOCK', hit: 'HIT', good: 'Good. Again.', row: n => n + ' in a row. Again.',

@@ -37,7 +37,13 @@ nav.langs a[aria-current] { background:var(--accent); color:var(--on-accent); }
 
 /* Список игр и приложений */
 .apps { list-style:none; margin:0; padding:0; display:grid; gap:20px; }
-.app { display:grid; grid-template-columns:1.15fr 1fr; background:var(--surface); border-radius:22px; overflow:hidden; box-shadow:var(--shadow); }
+.app { position:relative; display:grid; grid-template-columns:1.15fr 1fr; background:var(--surface); border-radius:22px; overflow:hidden;
+  box-shadow:var(--shadow); transition:transform .2s, box-shadow .2s; }
+/* Вся карточка ведёт на страницу приложения: ссылка из заголовка растянута на неё целиком */
+.app h3 a::after { content:""; position:absolute; inset:0; border-radius:inherit; }
+.app:hover { transform:translateY(-2px); box-shadow:0 1px 0 rgba(40,30,20,.06), 0 24px 54px rgba(40,30,20,.13); }
+.app:has(h3 a:focus-visible) { outline:2px solid var(--accent); outline-offset:3px; }
+.app h3 a:focus-visible { outline:none; }
 /* Обложка с постоянной пропорцией: её размер не зависит от длины текста, а значит и от языка */
 .app .cover { display:block; aspect-ratio:5/4; background:var(--app-bg, #222); }
 .app .cover img { display:block; width:100%; height:100%; object-fit:cover; }
@@ -53,9 +59,6 @@ nav.langs a[aria-current] { background:var(--accent); color:var(--on-accent); }
 /* Цвет приложения смешан с цветом текста, чтобы метка читалась и в светлой, и в тёмной теме */
 .tags .soon { color:var(--text); color:color-mix(in srgb, var(--app-accent, var(--text)) 70%, var(--text));
   background:color-mix(in srgb, var(--app-accent, var(--text)) 14%, transparent); }
-.links { display:flex; flex-wrap:wrap; gap:6px 18px; padding-top:6px; font-weight:600; }
-.links a { text-decoration:none; border-bottom:1.5px solid var(--line); }
-.links a:hover { border-color:currentColor; }
 
 /* Подвал */
 .site-foot { padding:56px 16px 48px; color:var(--muted); font-size:15px; }
