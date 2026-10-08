@@ -8,14 +8,41 @@
 <link rel="icon" href="/assets/icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/icon-180.png">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/lang.js"></script>
 </head>
 <body>
-<main class="page">
+<main class="page" lang="en" data-lang-block="en">
+  <nav class="langs" aria-label="Language"><a href="#" data-lang="en" aria-current="page">EN</a><a href="#" lang="ru" data-lang="ru">RU</a></nav>
   <p class="label">404</p>
   <h1>This page doesn’t exist</h1>
   <p class="meta">The link may be old, or the page has moved.</p>
   <p><a class="button" href="/">Go to the home page</a></p>
   <p>Looking for Riposte? <a href="/riposte/">Website</a> · <a href="/riposte/support.html">Support</a> · <a href="/riposte/privacy.html">Privacy Policy</a></p>
 </main>
+<main class="page" lang="ru" data-lang-block="ru" hidden>
+  <nav class="langs" aria-label="Язык"><a href="#" lang="en" data-lang="en">EN</a><a href="#" data-lang="ru" aria-current="page">RU</a></nav>
+  <p class="label">404</p>
+  <h1>Такой страницы нет</h1>
+  <p class="meta">Возможно, ссылка устарела или страница переехала.</p>
+  <p><a class="button" href="/ru/">На главную</a></p>
+  <p>Ищете Riposte? <a href="/ru/riposte/">Сайт игры</a> · <a href="/ru/riposte/support.html">Поддержка</a> · <a href="/ru/riposte/privacy.html">Конфиденциальность</a></p>
+</main>
+<script>
+// У 404 один адрес на все языки: язык берём из пути (/ru/…) или из сохранённого выбора
+(function () {
+  var pick = function (l) {
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-lang-block]').forEach(function (m) { m.hidden = m.getAttribute('data-lang-block') !== l; });
+    document.title = l === 'ru' ? 'Страница не найдена · Terak Studio' : 'Page not found · Terak Studio';
+  };
+  var l = location.pathname.indexOf('/ru/') === 0 ? 'ru' : null;
+  if (!l) try { l = localStorage.getItem('lang'); } catch (e) {}
+  pick(l === 'ru' ? 'ru' : 'en');
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('.langs [data-lang]');
+    if (a) { e.preventDefault(); pick(a.getAttribute('data-lang')); }
+  });
+})();
+</script>
 </body>
 </html>
