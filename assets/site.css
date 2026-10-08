@@ -45,7 +45,7 @@ nav.langs a[aria-current] { background:var(--accent); color:var(--on-accent); }
 .app:has(h3 a:focus-visible) { outline:2px solid var(--accent); outline-offset:3px; }
 .app h3 a:focus-visible { outline:none; }
 /* Обложка с постоянной пропорцией: её размер не зависит от длины текста, а значит и от языка */
-.app .cover { display:block; aspect-ratio:5/4; background:var(--app-bg, #222); }
+.app .cover { display:block; aspect-ratio:3/2; background:var(--app-bg, #222); }
 .app .cover img { display:block; width:100%; height:100%; object-fit:cover; }
 .app .body { padding:28px 30px 30px; display:flex; flex-direction:column; justify-content:center; gap:14px; }
 .app .head { display:flex; align-items:center; gap:14px; }
