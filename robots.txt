@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: /templates/
+Allow: /
 
 Sitemap: https://sarvar-anvarov.github.io/sitemap.xml

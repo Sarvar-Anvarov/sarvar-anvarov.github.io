@@ -7,19 +7,19 @@
 <meta name="description" content="A sword fighting game for iPhone about timing. Read the wind-up, block, dodge or parry, and fight through five arenas.">
 <meta name="theme-color" content="#17110b">
 <link rel="canonical" href="https://sarvar-anvarov.github.io/riposte/">
-<link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="assets/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Riposte">
 <meta property="og:title" content="Riposte: Sword Fighting Duel">
 <meta property="og:description" content="Read the wind-up. Block it, dodge it, or parry and strike back.">
 <meta property="og:url" content="https://sarvar-anvarov.github.io/riposte/">
-<meta property="og:image" content="https://sarvar-anvarov.github.io/riposte/img/og.jpg">
+<meta property="og:image" content="https://sarvar-anvarov.github.io/riposte/assets/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="fonts/grenze-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="riposte.css">
+<link rel="preload" href="assets/fonts/grenze-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/riposte.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -27,7 +27,7 @@
   "name": "Riposte: Sword Fighting Duel",
   "description": "A sword fighting game for iPhone about timing. Read the wind-up, block, dodge or parry, and fight through five arenas.",
   "url": "https://sarvar-anvarov.github.io/riposte/",
-  "image": "https://sarvar-anvarov.github.io/riposte/img/og.jpg",
+  "image": "https://sarvar-anvarov.github.io/riposte/assets/img/og.jpg",
   "gamePlatform": "iPhone",
   "operatingSystem": "iOS",
   "applicationCategory": "GameApplication",
@@ -47,7 +47,13 @@
     justify-content:flex-end; align-items:center; text-align:center; color:var(--cream); padding:0 16px 10vh; background:var(--night); }
   .hero-bg img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; object-position:center 30%; }
   .hero::before { content:""; position:absolute; inset:0; z-index:-1;
-    background:linear-gradient(180deg, rgba(20,14,8,.05) 0%, rgba(20,14,8,.2) 38%, rgba(23,17,11,.94) 96%, var(--night) 100%); }
+    background:linear-gradient(180deg, rgba(20,14,8,.5) 0, rgba(20,14,8,0) 140px),
+      linear-gradient(180deg, rgba(20,14,8,.05) 0%, rgba(20,14,8,.2) 38%, rgba(23,17,11,.94) 96%, var(--night) 100%); }
+  .hero-nav { position:absolute; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:18px 24px;
+    font:500 17px/1.2 var(--text); }
+  .hero-nav a { display:inline-flex; align-items:center; gap:4px; color:var(--cream); text-decoration:none; opacity:.9; text-shadow:0 1px 12px rgba(0,0,0,.6); }
+  .hero-nav a:hover { opacity:1; }
+  .hero-nav svg { width:18px; height:18px; }
   .hero h1 { font:700 clamp(72px, 13vw, 176px)/.85 var(--display); letter-spacing:.03em; margin:0; text-shadow:0 6px 48px rgba(0,0,0,.5); }
   .hero .sub { font:500 clamp(15px, 2vw, 22px) var(--display); letter-spacing:.32em; text-transform:uppercase; color:var(--gold); margin:14px 0 22px; }
   .hero p { max-width:520px; margin:0 auto 30px; font-size:20px; color:#eadfca; }
@@ -176,9 +182,13 @@
 </head>
 <body>
 <header class="hero">
+  <nav class="hero-nav" aria-label="Site">
+    <a href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Sarvar Anvarov</a>
+    <a href="support.html">Support</a>
+  </nav>
   <picture class="hero-bg">
-    <source media="(max-aspect-ratio: 4/5)" srcset="img/hero-tall.webp" width="1080" height="1350">
-    <img src="img/hero.webp" alt="" width="2400" height="1350" fetchpriority="high">
+    <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/hero-tall.webp" width="1080" height="1350">
+    <img src="assets/img/hero.webp" alt="" width="2400" height="1350" fetchpriority="high">
   </picture>
   <h1>RIPOSTE</h1>
   <div class="sub">Sword Fighting Duel</div>
@@ -194,11 +204,11 @@
       <h2>They killed the champion.<br>Not in the arena.</h2>
     </div>
     <div class="row">
-      <article class="act"><img src="img/act1.webp" alt="The champion with his sword on the temple steps" width="800" height="1000" loading="lazy"><div><b>I</b><h3>The champion</h3>
+      <article class="act"><img src="assets/img/act1.webp" alt="The champion with his sword on the temple steps" width="800" height="1000" loading="lazy"><div><b>I</b><h3>The champion</h3>
         <p>Your father ruled the arenas. No one could beat him on the sand.</p></div></article>
-      <article class="act"><img src="img/act2.webp" alt="A temple at night, lit by a single torch" width="800" height="1000" loading="lazy"><div><b>II</b><h3>The ambush</h3>
+      <article class="act"><img src="assets/img/act2.webp" alt="A temple at night, lit by a single torch" width="800" height="1000" loading="lazy"><div><b>II</b><h3>The ambush</h3>
         <p>His rival could not win in the open. So he came at night, with four men.</p></div></article>
-      <article class="act"><img src="img/act3.webp" alt="The city and its temple, seen from the arena stands" width="800" height="1000" loading="lazy"><div><b>III</b><h3>The road</h3>
+      <article class="act"><img src="assets/img/act3.webp" alt="The city and its temple, seen from the arena stands" width="800" height="1000" loading="lazy"><div><b>III</b><h3>The road</h3>
         <p>Five arenas. Each one ends with a man from that night. The last one is him.</p></div></article>
     </div>
     <p class="acts-foot">Win your father’s name back the only way that counts: <em>in the arena, in front of everyone.</em></p>
@@ -281,11 +291,11 @@
     <p class="kicker">The road</p>
     <h2>Five arenas. One name to win back.</h2>
     <div class="strip">
-      <div class="card"><img src="img/arena1.webp" alt="" width="720" height="960" loading="lazy"><span><small>I</small>Sand Circle</span></div>
-      <div class="card"><img src="img/arena2.webp" alt="" width="720" height="960" loading="lazy"><span><small>II</small>Winter Harbor</span></div>
-      <div class="card"><img src="img/arena3.webp" alt="" width="720" height="960" loading="lazy"><span><small>III</small>Temple Court</span></div>
-      <div class="card"><img src="img/arena4.webp" alt="" width="720" height="960" loading="lazy"><span><small>IV</small>Market Square</span></div>
-      <div class="card"><img src="img/arena5.webp" alt="" width="720" height="960" loading="lazy"><span><small>V</small>Colosseum</span></div>
+      <div class="card"><img src="assets/img/arena1.webp" alt="" width="720" height="960" loading="lazy"><span><small>I</small>Sand Circle</span></div>
+      <div class="card"><img src="assets/img/arena2.webp" alt="" width="720" height="960" loading="lazy"><span><small>II</small>Winter Harbor</span></div>
+      <div class="card"><img src="assets/img/arena3.webp" alt="" width="720" height="960" loading="lazy"><span><small>III</small>Temple Court</span></div>
+      <div class="card"><img src="assets/img/arena4.webp" alt="" width="720" height="960" loading="lazy"><span><small>IV</small>Market Square</span></div>
+      <div class="card"><img src="assets/img/arena5.webp" alt="" width="720" height="960" loading="lazy"><span><small>V</small>Colosseum</span></div>
     </div>
   </div>
 </section>

@@ -1,5 +1,5 @@
-/* Общий нейтральный стиль: главная страница разработчика, 404 и заготовки для новых приложений.
-   У каждой игры может быть свой стиль (как у /riposte/), этот файл им не нужен. */
+/* Общий нейтральный стиль: главная страница разработчика и 404.
+   У каждой игры свой стиль в её папке (как /riposte/assets/riposte.css). */
 
 :root {
   color-scheme:light dark;
@@ -25,7 +25,7 @@ img { max-width:100%; }
 .intro { padding:72px 16px 48px; }
 .intro .mono { display:block; width:56px; height:56px; border-radius:14px; margin-bottom:28px; box-shadow:0 0 0 1px var(--line); }
 .intro h1 { font:700 clamp(40px, 7vw, 64px)/1.02 var(--display); letter-spacing:-.025em; margin:0; }
-.intro .lead { font-size:clamp(19px, 2.4vw, 23px); line-height:1.45; color:var(--muted); margin:14px 0 22px; max-width:560px; }
+.intro .lead { font-size:clamp(19px, 2.4vw, 23px); line-height:1.45; color:var(--muted); margin:14px 0 0; max-width:560px; }
 .button { display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:999px; background:var(--accent); color:var(--on-accent);
   font-weight:600; text-decoration:none; }
 
@@ -54,7 +54,7 @@ img { max-width:100%; }
 .site-foot { padding:56px 16px 48px; color:var(--muted); font-size:15px; }
 .site-foot a { color:var(--text); }
 
-/* Страницы с текстом: 404, заготовки политики и поддержки */
+/* Страницы с текстом (404) */
 .page { max-width:720px; margin:0 auto; padding:64px 16px 72px; }
 .page h1 { font:700 clamp(34px, 6vw, 48px)/1.08 var(--display); letter-spacing:-.02em; margin:0 0 10px; }
 .page h2 { font:700 23px/1.25 var(--display); margin:36px 0 8px; }
@@ -70,15 +70,3 @@ img { max-width:100%; }
   .app .body { padding:22px 20px 24px; }
 }
 
-/* Заготовка страницы приложения (templates/app) */
-.app-hero { padding:72px 16px 40px; text-align:center; }
-.app-hero .icon { width:112px; height:112px; border-radius:26px; box-shadow:var(--shadow); }
-.app-hero h1 { font:700 clamp(40px, 7vw, 64px)/1.05 var(--display); letter-spacing:-.025em; margin:24px 0 6px; }
-.app-hero .sub { color:var(--muted); font-size:20px; margin:0 auto 26px; max-width:560px; }
-.app-hero .button { background:var(--app-accent, var(--accent)); color:#fff; }
-.features { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; list-style:none; padding:0; margin:24px 0 0; }
-.features li { background:var(--surface); border-radius:18px; padding:22px; box-shadow:var(--shadow); }
-.features h3 { margin:0 0 6px; font:700 19px/1.25 var(--display); }
-.features p { margin:0; color:var(--muted); }
-.site-foot nav { display:flex; flex-wrap:wrap; gap:4px 18px; margin-bottom:6px; }
-@media (max-width:760px) { .features { grid-template-columns:1fr; } }

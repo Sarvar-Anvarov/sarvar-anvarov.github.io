@@ -35,8 +35,13 @@ a { color:inherit; }
 
 /* Страницы с текстом */
 .doc { line-height:1.65; }
-.topbar { background:var(--night); padding:18px 16px; text-align:center; }
-.topbar a { font:700 24px var(--display); letter-spacing:.08em; color:var(--cream); text-decoration:none; }
+/* Шапка: путь «главная разработчика / игра» */
+.topbar { background:var(--night); padding:16px; }
+.topbar nav { max-width:688px; margin:0 auto; display:flex; align-items:center; gap:12px; font:500 17px/1.2 var(--text); color:var(--mist); }
+.topbar a { color:var(--cream); text-decoration:none; }
+.topbar a:first-child { opacity:.85; }
+.topbar a:hover { opacity:1; }
+.topbar .brand { font:700 24px var(--display); letter-spacing:.08em; }
 .doc main { max-width:720px; margin:0 auto; padding:48px 16px 72px; }
 .doc main a { color:var(--bronze); }
 .doc h1 { font:700 clamp(34px, 6vw, 48px)/1.05 var(--display); margin:0 0 6px; }
