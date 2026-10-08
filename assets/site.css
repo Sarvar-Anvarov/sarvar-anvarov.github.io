@@ -49,6 +49,10 @@ nav.langs a[aria-current] { background:var(--accent); color:var(--on-accent); }
 .app .cover img { display:block; width:100%; height:100%; object-fit:cover; }
 .app .body { padding:28px 30px 30px; display:flex; flex-direction:column; justify-content:center; gap:14px; }
 .app .head { display:flex; align-items:center; gap:14px; }
+.app .go { margin-left:auto; flex:none; width:36px; height:36px; border-radius:50%; display:grid; place-items:center;
+  background:var(--bg); color:var(--muted); transition:background .2s, color .2s; }
+.app .go svg { width:18px; height:18px; }
+.app:hover .go { background:var(--accent); color:var(--on-accent); }
 .app .icon { width:60px; height:60px; border-radius:14px; flex:none; box-shadow:0 0 0 1px rgba(0,0,0,.06); }
 .app h3 { font:700 24px/1.15 var(--display); letter-spacing:-.01em; margin:0; }
 .app h3 a { text-decoration:none; }
